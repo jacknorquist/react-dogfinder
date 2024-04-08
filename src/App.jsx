@@ -6,14 +6,11 @@ import dogs from './db.json';
 
 
 function App() {
-  console.log(dogs.dogs);
   return (
     <div className="App">
       <BrowserRouter>
         <NavBar dogs={dogs.dogs} />
-        <Routes>
-          <RoutesList />
-        </Routes>
+        <RoutesList />
       </BrowserRouter>
     </div>
   );

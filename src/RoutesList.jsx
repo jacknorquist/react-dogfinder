@@ -1,16 +1,18 @@
 import './App.css';
-import { Route } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import DogList from './DogList'
+import DogDetails from './DogDetails'
+import dogs from './db.json';
 
 
 
 function RoutesList() {
     return (
-        <div>
-            <Route path="/list" element={<DogList />} />
-            <Route path="/dogs/:name" element={<DogDetails />} />
-            <Route path="/" element={<DogList />} />
-        </div>
+        <Routes>
+            <Route path="/dogs" element={<DogList dogs={dogs.dogs} />} />
+            <Route path="/dogs/:name" element={<DogDetails dogs={dogs.dogs}/>} />
+            <Route path="*" element={<Navigate to="/dogs" />} />
+        </Routes>
     );
 }
 

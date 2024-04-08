@@ -1,12 +1,14 @@
 import React from "react";
-// import "./NavBar.css";
-import DogLinks from './DogLinks';
+import { Link } from "react-router-dom";
 
 function NavBar({ dogs }) {
     return (
+        <div>
+        <Link to="/">Home</Link>
         <nav className="NavBar">
-            {dogs.map(d => <DogLinks name={d.name} key={d.name} />)}
+            {dogs.map((d,i) => <Link to={`/dogs/${d.name}`} key={i}>{d.name}</Link>)}
         </nav>
+        </div>
     );
 }
 
