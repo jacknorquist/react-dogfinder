@@ -6,29 +6,40 @@ import { useState } from 'react';
 import dogs from '../db.json';
 
 
+/**
+ * Site Appliation for showing dogs
+ *
+ * state: dogs, isLoaded
+ * props: none
+ *
+ * App --> DogList --> DogDetails
+ */
+
 function App() {
 
-  const [dogs, setDogs] = useState();
+  const [dogs, setDogs] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false);
 
-
+  /** makes an AJAX request, fetches dog info */
   async function getDogs() {
     const result = await fetch('http://localhost:5001/dogs');
     const resultJson = await result.json();
 
     setDogs(resultJson);
-    console.log('json call', resultJson);
-    return resultJson;
+    setIsLoaded(true);
   }
-  console.log(getDogs());
-  console.log('dogs after call', dogs);
 
+  if (!isLoaded) getDogs();
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <NavBar dogs={getDogs()} />
-        <RoutesList dog={dogs} />
-      </BrowserRouter>
+      {isLoaded
+        ? <BrowserRouter>
+          <NavBar dogs={dogs} />
+          <RoutesList dogs={dogs} getDogs={getDogs}/>
+         </BrowserRouter>
+        : <h2>Loading...</h2>
+    }
     </div>
   );
 }

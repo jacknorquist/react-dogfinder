@@ -1,8 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
+/**
+ * Has a link to each dog + homempage
+ *
+ * props: dogs (array of dog objects)
+ * state: none
+ *
+ * App --> NavBar
+ */
+
 function NavBar({ dogs }) {
-    console.log(dogs);
     return (
         <div>
             <Link to="/">Home</Link>
